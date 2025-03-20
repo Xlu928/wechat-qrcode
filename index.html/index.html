@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信二维码</title>
+    <style>
+        .container {
+            text-align: center;
+            padding: 50px;
+        }
+        #qrcode-link {
+            color: #0078d4;
+            text-decoration: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a id="qrcode-link" onclick="toggleQRCode()">点击显示微信二维码</a >
+        <img id="qrcode-img" src="wechat-qrcode.jpg" class="hidden" 
+             alt="微信二维码" style="width: 300px; margin-top: 20px;">
+    </div>
+
+    <script>
+        function toggleQRCode() {
+            const img = document.getElementById('qrcode-img');
+            img.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
