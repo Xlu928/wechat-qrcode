@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信二维码</title>
+    <title>添加我的微信</title>
+   
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <style>
+        .container { max-width: 300px; margin: 20px auto; text-align: center; }
+        #qrcode { margin: 15px auto; }
+        .copy-btn { 
+            background: #07c160; 
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>添加我的微信</h3>
+        <a id="wechatLink" href="weixin://dl/business/?t=add_contact&alias=Lgc-lcx">
+            点击跳转到微信
+        </a >
+        <div id="qrcode"></div>
+        <button class="copy-btn" onclick="copyWechatID()">📋 复制微信号 Lgc-lcx</button>
+        <p id="tips" style="display:none;color:green;">已复制到剪贴板！</p >
+    </div>
+
+    <script>
+        // 生成二维码
+        new QRCode(document.getElementById("qrcode"), {
+            text: "weixin://dl/business/?t=add_contact&alias=Lgc-lcx",
+            width: 180,
+            height: 180,
+            colorDark: "#000"
+        });
+
+        // 复制微信号功能
+        function copyWechatID() {
+            navigator.clipboard.writeText("Lgc-lcx").then(() => {
+                document.getElementById("tips").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("tips").style.display = "none";
+                }, 2000);
+            });
+        }
+
+        // 微信浏览器检测
+        if (/micromessenger/i.test(navigator.userAgent)) {
+            document.getElementById("wechatLink").href = "#";
+            alert("请使用浏览器打开本页面！");
+        }
+    </script>
+</body>
+</html>
