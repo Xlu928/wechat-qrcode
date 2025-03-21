@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加微信好友</title>
+    <!-- 引入二维码生成库 -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <style>
+        /* 内联样式（或链接到 style.css） */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        #qrcode {
+            margin: 20px auto;
+        }
+        .copy-btn {
+            background: #07c160;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .tips {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>添加我的微信</h1>
+    <!-- 跳转链接 -->
+    <a id="wechatLink" href=" ">点击跳转到微信添加好友</a >
+    <!-- 二维码容器 -->
+    <div id="qrcode"></div>
+    <!-- 复制微信号功能 -->
+    <button class="copy-btn" onclick="copyWechatID()">📋 复制微信号</button>
+    <p id="copyTips" class="tips"></p >
+
+    <!-- 引入 JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
