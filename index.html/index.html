@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信二维码 - Cancan--77</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        #qrcode-container {
+            position: relative;
+            margin: 20px;
+        }
+        #qrCode {
+            width: 300px;
+            height: 300px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+        .copy-btn {
+            padding: 10px 20px;
+            background: #07c160;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .tips {
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="qrcode-container">
+        <img id="qrCode" src="wechat-qr-code.jpg" alt="微信二维码">
+    </div>
+    
+    <div class="contact-info">
+        <p>微信号：<span id="wechatId">Cancan--77</span></p >
+        <button class="copy-btn" onclick="copyWechatId()">点击复制微信号</button>
+    </div>
+
+    <div class="tips">
+        <p> 快手,抖音用户请点击保存二维码图片后，打开微信扫一扫</p >
+    </div>
+
+    <script>
+        // 点击/长按保存二维码
+        const qrCode = document.getElementById('qrCode');
+        
+        // 点击保存（适配移动端和PC端）
+        qrCode.addEventListener('click', function() {
+            saveImage();
+        });
+
+        // 长按保存（移动端）
+        let timer;
+        qrCode.addEventListener('touchstart', function(e) {
+            timer = setTimeout(() => {
+                saveImage();
+                e.preventDefault();
+            }, 800); // 长按800毫秒触发
+        });
+
+        qrCode.addEventListener('touchend', function() {
+            clearTimeout(timer);
+        });
+
+        // 保存图片函数
+        function saveImage() {
+            const link = document.createElement('a');
+            link.download = '微信二维码_Cancan--77.png';
+            link.href = qrCode.src;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('二维码已保存到相册！');
+        }
+
+        // 复制微信号功能
+        function copyWechatId() {
+            const text = document.getElementById('wechatId').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('微信号已复制！');
+            }).catch(() => {
+                // 兼容旧版浏览器
+                const input = document.createElement('input');
+                input.value = text;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                showToast('微信号已复制！');
+            });
+        }
+
+        // 显示操作提示
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style = `
+                position: fixed;
+                bottom: 20px;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                z-index: 999;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
